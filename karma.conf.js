@@ -6,32 +6,30 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'browserify'],
     files: [
       'node_modules/moment/moment.js',
-      'src/**/*.js'
+      'src/*.js'
     ],
     browsers: ['Chrome'],
     reporters: ['progress', 'coverage'],
     preprocessors: {
-        'src/**/*.spec.js': ['browserify'],
-        'src/**/!(*.spec).js': ['browserify']
+        'src/*.js': ['browserify']
+    },
+    browserify: {
+      //debug: true,
+      transform: ['browserify-istanbul']
+    },
+    coverageReporter: {
+        reporters : [
+            {"type": "text"},
+            {"type": "html", dir: 'coverages'}
+        ]
     },
     singleRun: true,
-
     plugins: [
       'karma-coverage',
       'karma-browserify',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-jasmine'
-    ],
-    transform: [
-      ['browserify-istanbul',
-        {
-          instrumenterConfig: {
-            embedSource: true   // this is important for HTML reports
-          }
-        }
-      ]
     ]
-
   });
 };

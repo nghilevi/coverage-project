@@ -3,12 +3,11 @@
  */
 
 var animal = require("./animal.js");
-
-function say() {
-    animal.openMouth();
-    return 'woof';
-}
-
-module.exports = {
-    say: say
+var dog = {
+    say: function () {
+        animal.openMouth();
+        return 'woof';
+    }
 };
+
+module.exports = dog;
